@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Header, Text } from '../../ui'
+import { FlexItem, Header, Text } from '../../ui'
 import { Flex } from '../../ui'
 import { DashboardLayout } from '../../ui/DashboardLayout'
 import { useAuth, LOGOUT } from '../../lib/context/auth-context'
@@ -46,15 +46,12 @@ export function Dashboard() {
       />
       <Flex as="main" fullHeight>
         <DashboardLayout
+          fullHeight
           isMenuOpened={uiState.isCategoryMenuOpened}
           isNoteListOpened={uiState.isNoteListMenuOpened}
         >
-          <Flex direction="column" p="md" overflow="auto">
-            Menu
-          </Flex>
-          <Flex direction="column" p="md" overflow="auto">
-            Content
-          </Flex>
+          <FlexItem>Menu</FlexItem>
+          <FlexItem>Content</FlexItem>
         </DashboardLayout>
       </Flex>
     </React.Fragment>
