@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-export const DashboardLayout = styled.div`
+export const MainContainer = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 20vw 1fr;
@@ -14,4 +14,12 @@ export const DashboardLayout = styled.div`
       transform: translateX(${props.isMenuOpened ? 0 : '-50vw'});
     }
   `}
+`
+
+export const Navbar = styled.nav`
+  background-color: rgba(0, 0, 0, 0.8);
+`
+
+export const Content = styled.main`
+  background-color: #181818;
 `

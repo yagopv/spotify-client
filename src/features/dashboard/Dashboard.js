@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
-import { FlexItem, Header, Text } from '../../ui'
-import { Flex } from '../../ui'
-import { DashboardLayout } from '../../ui/DashboardLayout'
+import { FlexItem, Header } from '../../ui'
+import { MainContainer, Content, Navbar } from '../../ui/DashboardLayout'
 import { useAuth, LOGOUT } from '../../lib/context/auth-context'
 import { useUI } from '../../lib/context/ui-context'
 import { useNotes } from './useNotes'
@@ -22,38 +21,32 @@ export function Dashboard() {
     if (uiState.isCategoryMenuOpened) {
       setUIState({
         isCategoryMenuOpened: false,
-        isNoteListMenuOpened: false,
       })
     }
   })
 
   return (
     <React.Fragment>
-      <Header
-        title="Notes App"
-        tag={tags[selectedTag]}
-        user={user}
-        onToggleMenu={() =>
-          setUIState({
-            isCategoryMenuOpened: !uiState.isCategoryMenuOpened,
-            isNoteListMenuOpened: false,
-          })
-        }
-        onLogout={() => {
-          dispatch({ type: LOGOUT })
-          localStorage.removeItem('currentUser')
-        }}
-      />
-      <Flex as="main" fullHeight>
-        <DashboardLayout
-          fullHeight
-          isMenuOpened={uiState.isCategoryMenuOpened}
-          isNoteListOpened={uiState.isNoteListMenuOpened}
-        >
-          <FlexItem>Menu</FlexItem>
-          <FlexItem>Content</FlexItem>
-        </DashboardLayout>
-      </Flex>
+      <MainContainer isMenuOpened={uiState.isCategoryMenuOpened}>
+        <Navbar></Navbar>
+        <Content>
+          <Header
+            title="Spotify Client"
+            tag={tags[selectedTag]}
+            user={user}
+            onToggleMenu={() =>
+              setUIState({
+                isCategoryMenuOpened: !uiState.isCategoryMenuOpened,
+                isNoteListMenuOpened: false,
+              })
+            }
+            onLogout={() => {
+              dispatch({ type: LOGOUT })
+              localStorage.removeItem('currentUser')
+            }}
+          />
+        </Content>
+      </MainContainer>
     </React.Fragment>
   )
 }

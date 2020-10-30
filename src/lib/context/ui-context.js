@@ -4,7 +4,6 @@ const UIContext = React.createContext()
 
 const initialState = {
   isCategoryMenuOpened: false,
-  isNoteListMenuOpened: false,
 }
 
 export function UIProvider({ children }) {
