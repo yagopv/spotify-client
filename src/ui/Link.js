@@ -9,12 +9,12 @@ export const linkMixin = css`
   text-decoration: none;
   :hover {
     opacity: 0.7;
-    border-bottom: 2px solid ${color('secondary')};
+    border-bottom: 2px solid ${color('yellow')};
   }
 
   :active {
     opacity: 1;
-    border-bottom: 2px solid ${color('secondary')};
+    border-bottom: 2px solid ${color('yellow')};
   }
 `
 

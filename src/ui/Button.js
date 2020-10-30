@@ -8,18 +8,20 @@ export const Button = styled.button`
   min-width: 100px;
   padding: 10px 20px;
   font-size: 1rem;
-  background: ${props => color(props.background || 'secondary')};
+  background: ${color('yellow')};
   text-transform: uppercase;
-  color: ${props => color(props.color || 'bright')};
+  color: ${color('black')};
   outline: none;
   cursor: pointer;
   height: 50px;
+
   :hover {
-    background: ${color('bright')};
-    color: ${color('secondary')};
+    background: ${color('black')};
+    color: ${color('yellow')};
     border: 2px solid ${color('secondary')};
     font-weight: bold;
   }
+
   :active {
     transform: translateY(2px);
   }

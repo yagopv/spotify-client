@@ -9,20 +9,19 @@ export const theme = {
     xl: '(min-width: 1140px)',
   },
   colors: {
-    primary: '#F8C51D',
-    secondary: '#C86818',
-    separator: '#1B1B1B',
-    medium: '#999999',
-    dark: '#000',
-    bright: '#FFF',
-    ko: '#E92119',
-    ok: '#3C8C20',
+    black: '#333333',
+    lightGrey: '#D6D6DE',
+    darkGrey: '#656565',
+    blue: '#46bcde',
+    red: '#E94F64',
+    orange: '#E57254',
+    yellow: '#E5C454',
+    green: '#52D273',
   },
   font: {
     family: {
       primary: '"Raleway", sans-serif',
       secondary: '"Oswald", sans-serif',
-      special: '"Press Start 2P"',
     },
     size: {
       h1: '2rem',
@@ -66,8 +65,6 @@ export const GlobalStyle = createGlobalStyle`
   body, #root {
     font-family: ${fontFamily('primary')};
     height: 100%;
-    background: ${color('dark')};
-    color: ${color('primary')};
     line-height: 1.3em;
     display: flex;
     flex-direction: column;
@@ -79,7 +76,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: ${color('primary')};
+    color: ${color('darkGrey')};
   }
 
   ::-webkit-scrollbar {
@@ -91,7 +88,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color('primary')};
+    background: ${color('lightGrey')};
   }
 
   ::-webkit-scrollbar-thumb:hover {

@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { color } from './theme'
 
 export const MainContainer = styled.div`
   display: grid;
@@ -17,7 +18,7 @@ export const MainContainer = styled.div`
 `
 
 export const Navbar = styled.nav`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #000;
 `
 
 export const Content = styled.main`

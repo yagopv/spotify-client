@@ -33,11 +33,11 @@ const ModalContainer = styled(Flex)`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${color('darkGrey')};
   align-items: center;
 `
 
 const ModalWrapper = styled(Flex)`
   padding: 1rem;
-  background: ${color('primary')};
+  background: ${color('yellow')};
 `

@@ -6,5 +6,5 @@ export const ValidationMessage = styled(Text)`
   position: absolute;
   top: 75px;
   font-size: 0.8rem;
-  color: ${color('ko')};
+  color: ${color('red')};
 `
