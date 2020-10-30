@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header } from '../../ui'
+import { Button, Flex, Text } from '../../ui'
 
 export default function Login() {
   const {
@@ -13,11 +13,20 @@ export default function Login() {
   }
 
   return (
-    <div className="login">
-      <Header />
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      fullHeight
+      bg="black"
+      direction="column"
+    >
+      <Text as="h1">Welcome to the Spotify Client</Text>
+      <Text as="h4" mt="md" mb="xl" color="darkGrey">
+        Please login to start using the app
+      </Text>
       <Button type="submit" onClick={handleLogin}>
         Login to spotify
       </Button>
-    </div>
+    </Flex>
   )
 }

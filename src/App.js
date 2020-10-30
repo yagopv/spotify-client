@@ -19,15 +19,15 @@ function App() {
             <GlobalStyle />
             <Router>
               <Switch>
-                <PrivateRoute exact path="/">
-                  <Dashboard />
-                </PrivateRoute>
                 <Route path="/login">
                   <Login />
                 </Route>
                 <Route path="/redirect">
                   <Redirect />
                 </Route>
+                <PrivateRoute path="/">
+                  <Dashboard />
+                </PrivateRoute>
               </Switch>
             </Router>
           </React.Fragment>

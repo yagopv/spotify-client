@@ -19,6 +19,7 @@ export const MainContainer = styled.div`
 
 export const Navbar = styled.nav`
   background-color: #000;
+  padding: 5px 2rem;
 `
 
 export const Content = styled.main`

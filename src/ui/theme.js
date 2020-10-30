@@ -9,7 +9,7 @@ export const theme = {
     xl: '(min-width: 1140px)',
   },
   colors: {
-    black: '#333333',
+    black: '#000',
     lightGrey: '#D6D6DE',
     darkGrey: '#656565',
     blue: '#46bcde',

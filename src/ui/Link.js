@@ -3,19 +3,12 @@ import { Link as RouterLink } from 'react-router-dom'
 import { color, fontFamily } from './theme'
 
 export const linkMixin = css`
-  font-family: ${fontFamily('secondary')};
-  color: ${color('secondary')};
+  font-family: ${fontFamily('primary')};
+  color: ${color('yellow')};
   text-transform: uppercase;
   text-decoration: none;
-  :hover {
-    opacity: 0.7;
-    border-bottom: 2px solid ${color('yellow')};
-  }
-
-  :active {
-    opacity: 1;
-    border-bottom: 2px solid ${color('yellow')};
-  }
+  font-weight: bold;
+  cursor: pointer;
 `
 
 export const Link = styled(RouterLink)`

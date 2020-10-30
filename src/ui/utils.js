@@ -1,5 +1,5 @@
 import { css } from 'styled-components/macro'
-import { spacing } from './theme'
+import { color as themeColor, spacing } from './theme'
 
 export const withSpacingProps = css`
   ${({ p }) => p && `padding: ${spacing(p) || p};`}
@@ -29,6 +29,6 @@ export const withOverflowProps = css`
 `
 
 export const withColorProps = css`
-  ${({ bg }) => bg && `background: ${bg};`}
-  ${({ color }) => color && `color: ${color};`}
+  ${({ bg }) => bg && `background: ${themeColor(bg)};`}
+  ${({ color }) => color && `color: ${themeColor(color)};`}
 `

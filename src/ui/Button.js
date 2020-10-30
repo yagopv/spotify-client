@@ -19,7 +19,6 @@ export const Button = styled.button`
     background: ${color('black')};
     color: ${color('yellow')};
     border: 2px solid ${color('secondary')};
-    font-weight: bold;
   }
 
   :active {
