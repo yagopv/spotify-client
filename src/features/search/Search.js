@@ -6,8 +6,8 @@ import AlbumList from '../../ui/album/AlbumList'
 import ArtistList from '../../ui/artist/ArtistList'
 import TrackList from '../../ui/track/TrackList'
 import { Flex, FlexItem } from '../../ui/base'
-import Track from '../../ui/track/Track'
 import TitleBar from './TitleBar'
+import MainResult from './MainResult'
 
 export default function Search() {
   const { searchTerm } = useParams()
@@ -21,11 +21,28 @@ export default function Search() {
 
   const searchData = useMemo(() => {
     if (data) {
-      data.artists.items.sort((a, b) => (a.popularity > b.popularity ? -1 : 1))
-      data.albums.items.sort((a, b) => (a.popularity > b.popularity ? -1 : 1))
-      data.tracks.items.sort((a, b) => (a.popularity > b.popularity ? -1 : 1))
+      const formattedData = {
+        artists: data.artists.items.sort((a, b) =>
+          a.popularity > b.popularity ? -1 : 1
+        ),
+        albums: data.albums.items.sort((a, b) =>
+          a.popularity > b.popularity ? -1 : 1
+        ),
+        tracks: data.tracks.items.sort((a, b) =>
+          a.popularity > b.popularity ? -1 : 1
+        )
+      }
 
-      return data
+      return {
+        ...formattedData,
+        mainResult: [
+          formattedData.artists[0],
+          formattedData.albums[0],
+          formattedData.tracks[0]
+        ].reduce((prev, current) => {
+          return prev.popularity > current.popularity ? prev : current
+        })
+      }
     }
     return null
   }, [data])
@@ -35,16 +52,17 @@ export default function Search() {
       <Flex>
         <FlexItem flex="1">
           <TitleBar title="Main Result" />
-          <p>Main Result</p>
+          <MainResult item={searchData?.mainResult} />
         </FlexItem>
         <FlexItem flex="1">
-          <TrackList tracks={searchData?.tracks?.items} />
+          <TitleBar title="Songs" />
+          <TrackList tracks={searchData?.tracks} />
         </FlexItem>
       </Flex>
       <TitleBar title="Artists" onShowAll={() => console.log('click')} />
-      <ArtistList artists={searchData?.artists?.items} />
+      <ArtistList artists={searchData?.artists} />
       <TitleBar title="Albums" onShowAll={() => console.log('click')} />
-      <AlbumList albums={searchData?.albums?.items} />
+      <AlbumList albums={searchData?.albums} />
     </>
   )
 }
