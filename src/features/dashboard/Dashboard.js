@@ -19,6 +19,7 @@ export function Dashboard() {
   const categoryList = useRef(null)
   const history = useHistory(null)
   const [user, setUser] = useAuth()
+
   useOnClickOutside(categoryList, () => {
     if (uiState.isCategoryMenuOpened) {
       setUIState({
@@ -29,11 +30,11 @@ export function Dashboard() {
 
   let { path, url } = useRouteMatch()
 
-  const { data, run } = useAsync()
+  const { data: profile, run: runProfile } = useAsync()
 
   useEffect(() => {
-    run(http.getUser())
-  }, [run])
+    runProfile(http.getUser())
+  }, [runProfile])
 
   return (
     <React.Fragment>
@@ -71,13 +72,19 @@ export function Dashboard() {
         </DashboardNavbar>
         <DashboardContent>
           <Header
-            user={data}
+            user={profile}
             onToggleMenu={() =>
               setUIState({
                 isCategoryMenuOpened: !uiState.isCategoryMenuOpened,
                 isNoteListMenuOpened: false
               })
             }
+            onTextChange={value => {
+              if (value) {
+                history.push(`/search/${value}`)
+              }
+              console.log(value)
+            }}
             onLogout={() => {
               history.push('/login')
               localStorage.removeItem('currentUser')
@@ -90,7 +97,7 @@ export function Dashboard() {
               <PrivateRoute exact path={path}>
                 <Home />
               </PrivateRoute>
-              <PrivateRoute path={`/search`}>
+              <PrivateRoute path={`/search/:searchTerm`}>
                 <Search />
               </PrivateRoute>
               <PrivateRoute path={`/my-library`}>
