@@ -5,10 +5,10 @@ export const Flex = styled(Box)`
   display: flex;
   align-items: ${props => props.alignItems};
   justify-content: ${props => props.justifyContent};
-  flex-direction: ${props => props.direction};
+  flex-direction: ${props => props.flexDirection};
   height: ${props => (props.fullHeight ? '100%' : 'auto')};
 `
 
 export const FlexItem = styled(Box)`
-  flex: ${props => props.grow};
+  flex: ${props => props.flex};
 `

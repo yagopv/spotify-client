@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, Flex, Text } from '../../ui'
+import { Button, Flex, Text } from '../../ui/base'
 
 export default function Login() {
   const {
     REACT_APP_CLIENT_ID,
     REACT_APP_AUTHORIZE_URL,
-    REACT_APP_REDIRECT_URL,
+    REACT_APP_REDIRECT_URL
   } = process.env
 
   const handleLogin = () => {

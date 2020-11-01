@@ -1,26 +1,25 @@
 import React, { useRef } from 'react'
-import { Header, Link, List, ListItem, Text } from '../../ui'
-import { MainContainer, Content, Navbar } from '../../ui/DashboardLayout'
+import { NavLink, List, ListItem, Text, Box } from '../../ui/base'
+import Header from './Header'
+import { DashboardContainer, DashboardNavbar, DashboardContent } from './styles'
 import { useAuth, LOGOUT } from '../../lib/context/auth-context'
 import { useUI } from '../../lib/context/ui-context'
-import { useMedia } from '../../lib/hooks/useMedia'
-import { theme } from '../../ui/theme'
 import { useOnClickOutside } from '../../lib/hooks/useOnClickOutside'
-import { Router, Switch, useRouteMatch } from 'react-router-dom'
+import { Switch, useRouteMatch } from 'react-router-dom'
 import PrivateRoute from '../auth/PrivateRoute'
 import Home from '../home/Home'
 import Search from '../search/Search'
 import MyLibrary from '../my-library/MyLibrary'
+import { FaSistrix, FaHome, FaBook, FaSpotify } from 'react-icons/fa'
 
 export function Dashboard() {
   const [{ user }, dispatch] = useAuth()
   const [uiState, setUIState] = useUI()
-  const isMobile = useMedia([theme.breakpoints.md], [false], true)
   const categoryList = useRef(null)
   useOnClickOutside(categoryList, () => {
     if (uiState.isCategoryMenuOpened) {
       setUIState({
-        isCategoryMenuOpened: false,
+        isCategoryMenuOpened: false
       })
     }
   })
@@ -28,30 +27,45 @@ export function Dashboard() {
 
   return (
     <React.Fragment>
-      <MainContainer isMenuOpened={uiState.isCategoryMenuOpened}>
-        <Navbar>
-          <Text as="h1" pt="md">
-            Spotify
+      <DashboardContainer isMenuOpened={uiState.isCategoryMenuOpened}>
+        <DashboardNavbar>
+          <Text as="h3" pt="md">
+            <FaSpotify /> Spoticli
           </Text>
-          <List pt="md">
-            <ListItem py="sm">
-              <Link to={`${url}`}>Home</Link>
+          <List mt="xl">
+            <ListItem mt="md">
+              <NavLink exact to={`${url}`}>
+                <FaHome />{' '}
+                <Box as="span" pl="xs">
+                  Home
+                </Box>
+              </NavLink>
             </ListItem>
-            <ListItem py="sm">
-              <Link to={'/search'}>Search</Link>
+            <ListItem mt="md">
+              <NavLink to={'/search'}>
+                <FaSistrix />
+                <Box as="span" pl="xs">
+                  Search
+                </Box>
+              </NavLink>
             </ListItem>
-            <ListItem py="sm">
-              <Link to={`/my-library`}>My Library</Link>
+            <ListItem mt="md">
+              <NavLink to={`/my-library`}>
+                <FaBook />
+                <Box as="span" pl="xs">
+                  MyLibrary
+                </Box>
+              </NavLink>
             </ListItem>
           </List>
-        </Navbar>
-        <Content>
+        </DashboardNavbar>
+        <DashboardContent>
           <Header
             user={user}
             onToggleMenu={() =>
               setUIState({
                 isCategoryMenuOpened: !uiState.isCategoryMenuOpened,
-                isNoteListMenuOpened: false,
+                isNoteListMenuOpened: false
               })
             }
             onLogout={() => {
@@ -59,19 +73,21 @@ export function Dashboard() {
               localStorage.removeItem('currentUser')
             }}
           />
-          <Switch>
-            <PrivateRoute exact path={path}>
-              <Home />
-            </PrivateRoute>
-            <PrivateRoute path={`/search`}>
-              <Search />
-            </PrivateRoute>
-            <PrivateRoute path={`/my-library`}>
-              <MyLibrary />
-            </PrivateRoute>
-          </Switch>
-        </Content>
-      </MainContainer>
+          <Box p="md">
+            <Switch>
+              <PrivateRoute exact path={path}>
+                <Home />
+              </PrivateRoute>
+              <PrivateRoute path={`/search`}>
+                <Search />
+              </PrivateRoute>
+              <PrivateRoute path={`/my-library`}>
+                <MyLibrary />
+              </PrivateRoute>
+            </Switch>
+          </Box>
+        </DashboardContent>
+      </DashboardContainer>
     </React.Fragment>
   )
 }

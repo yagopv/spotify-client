@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import styled from 'styled-components'
-import { Button, Flex, Text } from '.'
-import { color } from './theme'
+import { Button, Flex, Text } from '../base'
+import { ModalContainer, ModalWrapper } from './styles'
 
-export function Dialog({ children, onCancel, onAccept }) {
+export default function Dialog({ children, onCancel, onAccept }) {
   return ReactDOM.createPortal(
     <ModalContainer
       justifyContent="center"
-      alignIntems="center"
-      direction="column"
+      alignItems="center"
+      flexDirection="column"
     >
       <ModalWrapper alignItems="center" direction="column">
         <Text as="h4" color="dark">
@@ -25,19 +24,6 @@ export function Dialog({ children, onCancel, onAccept }) {
         </Flex>
       </ModalWrapper>
     </ModalContainer>,
-    document.getElementById('root'),
+    document.getElementById('root')
   )
 }
-
-const ModalContainer = styled(Flex)`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background: ${color('darkGrey')};
-  align-items: center;
-`
-
-const ModalWrapper = styled(Flex)`
-  padding: 1rem;
-  background: ${color('yellow')};
-`

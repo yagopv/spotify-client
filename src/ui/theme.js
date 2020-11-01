@@ -6,7 +6,7 @@ export const theme = {
     sm: '(min-width: 576px)',
     md: '(min-width: 768px)',
     lg: '(min-width: 992px)',
-    xl: '(min-width: 1140px)',
+    xl: '(min-width: 1140px)'
   },
   colors: {
     black: '#000',
@@ -16,36 +16,29 @@ export const theme = {
     red: '#E94F64',
     orange: '#E57254',
     yellow: '#E5C454',
-    green: '#52D273',
+    green: '#52D273'
   },
-  font: {
-    family: {
-      primary: '"Raleway", sans-serif',
-      secondary: '"Oswald", sans-serif',
-    },
-    size: {
-      h1: '2rem',
-      h2: '1.8rem',
-      h3: '1.6rem',
-      h4: '1.2rem',
-      h5: '1rem',
-      h6: '0.8rem',
-      p: '0.8rem',
-    },
+  fontFamily: {
+    primary: '"Raleway", sans-serif',
+    secondary: '"Oswald", sans-serif'
+  },
+  fontSize: {
+    h1: '2rem',
+    h2: '1.8rem',
+    h3: '1.6rem',
+    h4: '1.2rem',
+    h5: '1rem',
+    h6: '0.8rem',
+    p: '0.8rem'
   },
   spacing: {
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
     lg: '1.5rem',
-    xl: '3rem',
-  },
+    xl: '3rem'
+  }
 }
-
-export const color = color => theme.colors[color]
-export const fontFamily = family => theme.font.family[family]
-export const fontSize = size => theme.font.size[size]
-export const spacing = size => theme.spacing[size]
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -63,12 +56,13 @@ export const GlobalStyle = createGlobalStyle`
   }
  
   body, #root {
-    font-family: ${fontFamily('primary')};
+    font-family: ${theme.fontFamily.primary};
     height: 100%;
     line-height: 1.3em;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    color: ${theme.colors.lightGrey}
   }
 
   .gutter-horizontal {
@@ -76,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: ${color('darkGrey')};
+    color: ${theme.colors.darkGrey};
   }
 
   ::-webkit-scrollbar {
@@ -84,14 +78,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${color('dark')};
+    background: ${theme.colors.dark};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color('lightGrey')};
+    background: ${theme.colors.lightGrey};
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${color('bright')};
+    background: ${theme.colors.bright};
+  }
+
+  .icon {
+    padding: 5px
   }
 `

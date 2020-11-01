@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
+import { theme } from '../theme'
 import { Box } from './Box'
-import { color, fontFamily, fontSize } from './theme'
-import { withSpacingProps } from './utils'
+import { space } from '../helpers'
 
 function isHeading(type) {
   return ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(type)
@@ -22,17 +22,19 @@ const truncatedMultilineMixin = css`
 
 export const Text = styled(Box)`
   color: ${props =>
-    color(props.color) ||
-    (isHeading(props.as) ? color('lightGrey') : color('darkGrey'))};
+    theme.colors[props.color] ||
+    (isHeading(props.as) ? theme.colors.lightGrey : theme.colors.darkGrey)};
   font-weight: ${props => (isHeading(props.as) ? '900' : '400')}
   font-family: ${props =>
-    fontFamily(props.fontFamily) ||
-    (isHeading(props.as) ? fontFamily('secondary') : fontFamily('primary'))};
-  font-size:  ${props => fontSize(props.as) || '0.8rem'};
+    theme.fontFamily[props.fontFamily] ||
+    (isHeading(props.as)
+      ? theme.fontFamily.secondary
+      : theme.fontFamily.primary)};
+  font-size:  ${props => theme.fontSize[props.as] || '0.8rem'};
   text-transform:  ${props =>
     props.textTransform || (isHeading(props.as) ? 'uppercase' : 'none')};
   line-height: ${props => isHeading(props.as) && '2rem'};
   ${props => props.truncate === 1 && truncatedMixin}
   ${props => props.truncate > 1 && truncatedMultilineMixin}
-  ${withSpacingProps}
+  ${space}
 `

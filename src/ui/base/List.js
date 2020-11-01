@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro'
-import { withColorProps, withSpacingProps } from './utils'
+import { space } from '../helpers'
 
 export const List = styled.ul`
   list-style-type: none;
-  ${withSpacingProps}
+  ${space}
 `
 
 export const ListItem = styled.li`
-  ${withSpacingProps}
+  ${space}
+  height: auto
 `
