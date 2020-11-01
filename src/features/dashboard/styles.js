@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import { theme } from '../../ui/theme'
-import { Input } from '../../ui/base'
+import { FlexItem, Input, Link } from '../../ui/base'
 import { FaAngleLeft, FaBars, FaSearch } from 'react-icons/fa'
 
 export const DashboardContainer = styled.div`
@@ -53,6 +53,7 @@ export const SearchIcon = styled(FaSearch)`
   height: 32px;
   width: 32px;
   cursor: pointer;
+  margin-right: ${theme.spacing.md};
   @media ${theme.breakpoints.sm} {
     display: none;
   }
@@ -77,5 +78,41 @@ export const SearchInput = styled(Input)`
 
   @media ${theme.breakpoints.xs} {
     display: none;
+  }
+`
+
+export const Avatar = styled.img`
+  cursor: pointer;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+`
+
+export const UserContainer = styled.div`
+  position: relative;
+  flex: 1;
+  text-align: right;
+`
+
+export const UserMenu = styled.div`
+  position: absolute;
+  right: 0;
+  width: 200px;
+  text-align: right;
+  border: 1px solid ${theme.colors.yellow};
+  padding: ${theme.spacing.md};
+
+  opacity: 0;
+  transition: all 0.1s linear;
+
+  ${props =>
+    props.active &&
+    `
+    opacity: 1;
+  `};
+
+  ${Link} {
+    display: block;
+    margin-top: 10px;
   }
 `
