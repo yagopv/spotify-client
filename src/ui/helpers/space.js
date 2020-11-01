@@ -16,8 +16,8 @@ const spaceProps = props => ({
 
 export const space = css`
   ${spaceProps}
-  ${({ px }) => px && `padding: 0 ${theme.spacing[px]};`}]  ${({ py }) =>
-    py && `padding: ${theme.spacing[py]} 0;`}    
-  ${({ mx }) => mx && `margin: 0 ${theme.spacing[mx]};`}]  ${({ my }) =>
-    my && `margin: ${theme.spacing[my]} 0;`}
+  ${({ px }) => px && `padding: 0 ${theme.spacing[px]};`}  
+  ${({ py }) => py && `padding: ${theme.spacing[py]} 0;`}
+  ${({ mx }) => mx && `margin: 0 ${theme.spacing[mx]};`}  
+  ${({ my }) => my && `margin: ${theme.spacing[my]} 0;`}
 `

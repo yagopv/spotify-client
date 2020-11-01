@@ -1,12 +1,11 @@
 import React from 'react'
-import { FaSearch } from 'react-icons/fa'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useMedia } from '../../lib/hooks/useMedia'
-import { Flex, FlexItem, Text, Link, Box } from '../../ui/base'
+import { Flex, FlexItem, Link, Text } from '../../ui/base'
 import { theme } from '../../ui/theme'
 import { MenuIcon, BackIcon, SearchIcon, SearchInput } from './styles'
 
-export default function Header({ title, tag, user, onToggleMenu, onLogout }) {
+export default function Header({ user, onToggleMenu, onLogout }) {
   const isMobile = useMedia([theme.breakpoints.sm], [false], true)
   const location = useLocation()
   const history = useHistory()
@@ -24,12 +23,15 @@ export default function Header({ title, tag, user, onToggleMenu, onLogout }) {
           />
         </FlexItem>
       )}
-      <FlexItem px="md">
+      <FlexItem px="md" flex="1">
         <SearchIcon />
       </FlexItem>
-      <Link to onClick={onLogout}>
-        Logout
-      </Link>
+      <FlexItem px="md" textAlign="right">
+        {user && <Text>Hola {user.display_name}</Text>}
+        <Link to="#" onClick={onLogout}>
+          Logout
+        </Link>
+      </FlexItem>
     </Flex>
   )
 }

@@ -13,31 +13,31 @@ describe('<PrivateRoute />', () => {
   it('should render the component if the user is authenticated', () => {
     authContext.useAuth = jest.fn(() => [
       {
-        isAuthenticated: true,
-      },
+        display_name: 'Test User'
+      }
     ])
 
     const { getByText } = render(
       <PrivateRoute exact path="/" component={Component} />,
       {
-        wrapper: MemoryRouter,
-      },
+        wrapper: MemoryRouter
+      }
     )
 
     expect(getByText('Try to find this').textContent).toEqual(
-      'Try to find this',
+      'Try to find this'
     )
   })
 
   it('should render the Login component when the user is not authenticated', () => {
     authContext.useAuth = jest.fn(() => [
       {
-        isAuthenticated: false,
-      },
+        display_name: 'Test User'
+      }
     ])
 
     render(<PrivateRoute exact path="/" component={Component} />, {
-      wrapper: MemoryRouter,
+      wrapper: MemoryRouter
     })
     const redirect = jest.spyOn(reactRouter, 'Redirect')
     expect(redirect).toHaveBeenCalledTimes(1)

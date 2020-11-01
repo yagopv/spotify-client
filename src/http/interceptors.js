@@ -3,6 +3,7 @@ let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 export const tokenManagerInterceptor = {
   success(config) {
     const { access_token: token } = currentUser
+
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
@@ -10,5 +11,13 @@ export const tokenManagerInterceptor = {
   },
   error(error) {
     return Promise.reject(error)
-  },
+  }
 }
+
+export const dataInterceptor = {
+  success(response) {
+    return response.data
+  }
+}
+
+export { currentUser }

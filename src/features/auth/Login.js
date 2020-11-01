@@ -14,11 +14,11 @@ export default function Login() {
 
   return (
     <Flex
+      bg="black"
       alignItems="center"
       justifyContent="center"
       fullHeight
-      bg="black"
-      direction="column"
+      flexDirection="column"
     >
       <Text as="h1">Welcome to the Spotify Client</Text>
       <Text as="h4" mt="md" mb="xl" color="darkGrey">

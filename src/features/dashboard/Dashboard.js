@@ -1,21 +1,24 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { NavLink, List, ListItem, Text, Box } from '../../ui/base'
 import Header from './Header'
 import { DashboardContainer, DashboardNavbar, DashboardContent } from './styles'
-import { useAuth, LOGOUT } from '../../lib/context/auth-context'
+import { useAuth } from '../../lib/context/auth-context'
 import { useUI } from '../../lib/context/ui-context'
 import { useOnClickOutside } from '../../lib/hooks/useOnClickOutside'
-import { Switch, useRouteMatch } from 'react-router-dom'
+import { Switch, useHistory, useRouteMatch } from 'react-router-dom'
 import PrivateRoute from '../auth/PrivateRoute'
 import Home from '../home/Home'
 import Search from '../search/Search'
 import MyLibrary from '../my-library/MyLibrary'
 import { FaSistrix, FaHome, FaBook, FaSpotify } from 'react-icons/fa'
+import { useAsync } from '../../lib/hooks/useAsync'
+import http from '../../http'
 
 export function Dashboard() {
-  const [{ user }, dispatch] = useAuth()
   const [uiState, setUIState] = useUI()
   const categoryList = useRef(null)
+  const history = useHistory(null)
+  const [user, setUser] = useAuth()
   useOnClickOutside(categoryList, () => {
     if (uiState.isCategoryMenuOpened) {
       setUIState({
@@ -23,7 +26,14 @@ export function Dashboard() {
       })
     }
   })
+
   let { path, url } = useRouteMatch()
+
+  const { data, run } = useAsync()
+
+  useEffect(() => {
+    run(http.getUser())
+  }, [run])
 
   return (
     <React.Fragment>
@@ -61,7 +71,7 @@ export function Dashboard() {
         </DashboardNavbar>
         <DashboardContent>
           <Header
-            user={user}
+            user={data}
             onToggleMenu={() =>
               setUIState({
                 isCategoryMenuOpened: !uiState.isCategoryMenuOpened,
@@ -69,8 +79,10 @@ export function Dashboard() {
               })
             }
             onLogout={() => {
-              dispatch({ type: LOGOUT })
+              history.push('/login')
               localStorage.removeItem('currentUser')
+              http.currentUser = null
+              setUser(null)
             }}
           />
           <Box p="md">

@@ -1,11 +1,11 @@
 import React from 'react'
 
-export const ASYNC_STATUS = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-}
+const cache = new Map()
+
+export const IDLE_STATUS = 'idle'
+export const PENDING_STATUS = 'pending'
+export const REJECTED_STATUS = 'rejected'
+export const RESOLVED_STATUS = 'resolved'
 
 function useSafeDispatch(dispatch) {
   const mounted = React.useRef(false)
@@ -17,28 +17,20 @@ function useSafeDispatch(dispatch) {
 
   return React.useCallback(
     (...args) => (mounted.current ? dispatch(...args) : void 0),
-    [dispatch],
+    [dispatch]
   )
 }
 
 function asyncReducer(state, action) {
   switch (action.type) {
-    case ASYNC_STATUS.PENDING: {
-      return { status: ASYNC_STATUS.PENDING, data: null, error: null }
+    case PENDING_STATUS: {
+      return { status: PENDING_STATUS, data: null, error: null }
     }
-    case ASYNC_STATUS.RESOLVED: {
-      return {
-        status: ASYNC_STATUS.RESOLVED,
-        data: action.data,
-        error: null,
-      }
+    case RESOLVED_STATUS: {
+      return { status: RESOLVED_STATUS, data: action.data, error: null }
     }
-    case ASYNC_STATUS.REJECTED: {
-      return {
-        status: ASYNC_STATUS.REJECTED,
-        data: null,
-        error: action.error,
-      }
+    case REJECTED_STATUS: {
+      return { status: REJECTED_STATUS, data: null, error: action.error }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -48,10 +40,10 @@ function asyncReducer(state, action) {
 
 function useAsync(initialState) {
   const [state, unsafeDispatch] = React.useReducer(asyncReducer, {
-    status: ASYNC_STATUS.IDLE,
+    status: IDLE_STATUS,
     data: null,
     error: null,
-    ...initialState,
+    ...initialState
   })
 
   const dispatch = useSafeDispatch(unsafeDispatch)
@@ -59,27 +51,37 @@ function useAsync(initialState) {
   const { data, error, status } = state
 
   const run = React.useCallback(
-    promise => {
-      dispatch({ type: ASYNC_STATUS.PENDING })
+    (promise, cacheKey) => {
+      const cachedData = cache.get(cacheKey)
+      if (cachedData) {
+        dispatch({ type: RESOLVED_STATUS, data: cachedData })
+        return
+      }
+
+      dispatch({ type: PENDING_STATUS })
+
       promise.then(
         data => {
-          dispatch({ type: ASYNC_STATUS.RESOLVED, data })
+          dispatch({ type: RESOLVED_STATUS, data })
+          if (cacheKey) {
+            cache.set(cacheKey, data)
+          }
         },
         error => {
-          dispatch({ type: ASYNC_STATUS.REJECTED, error })
-        },
+          dispatch({ type: REJECTED_STATUS, error })
+        }
       )
     },
-    [dispatch],
+    [dispatch]
   )
 
   const setData = React.useCallback(
-    data => dispatch({ type: ASYNC_STATUS.RESOLVED, data }),
-    [dispatch],
+    data => dispatch({ type: RESOLVED_STATUS, data }),
+    [dispatch]
   )
   const setError = React.useCallback(
-    error => dispatch({ type: ASYNC_STATUS.REJECTED, error }),
-    [dispatch],
+    error => dispatch({ type: REJECTED_STATUS, error }),
+    [dispatch]
   )
 
   return {
@@ -88,7 +90,7 @@ function useAsync(initialState) {
     error,
     status,
     data,
-    run,
+    run
   }
 }
 

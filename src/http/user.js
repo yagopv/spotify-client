@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const { REACT_APP_SPOTIFY_API_URL } = process.env
 
-export function getAlbum(albumId) {
-  const url = `${REACT_APP_SPOTIFY_API_URL}/albums/${albumId}`
+export function getUser() {
+  const url = `${REACT_APP_SPOTIFY_API_URL}/me`
   return axios.get(url)
 }
