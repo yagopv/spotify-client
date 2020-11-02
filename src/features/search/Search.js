@@ -16,6 +16,7 @@ import WaitUntil from '../../ui/wait-until/WaitUntil'
 import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
 import Card from '../../ui/card/Card'
 import { extractInfo } from '../../lib/helpers'
+import CardList from '../../ui/card/CardList'
 
 export default function Search() {
   const { searchTerm } = useParams()
@@ -71,9 +72,9 @@ export default function Search() {
         </FlexItem>
       </Flex>
       <TitleBar title="Artists" onShowAll={() => console.log('click')} />
-      <ArtistList artists={searchData?.artists} />
+      <CardList id="artists" items={searchData?.artists} />
       <TitleBar title="Albums" onShowAll={() => console.log('click')} />
-      <AlbumList albums={searchData?.albums} />
+      <CardList id="albums" items={searchData?.albums} />
     </WaitUntil>
   )
 }
