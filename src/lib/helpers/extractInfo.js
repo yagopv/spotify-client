@@ -8,7 +8,7 @@ export function extractInfo(item) {
       id: item.id,
       title: item.name,
       subtitle: item.artists[0].name,
-      url: item.album.images[1].url,
+      imageUrl: item.album.images?.[1]?.url,
       duration: msToTime(item.duration_ms)
     }
   }
@@ -18,7 +18,7 @@ export function extractInfo(item) {
       id: item.id,
       title: item.name,
       subtitle: item.artists[0].name,
-      url: item.images[1].url
+      imageUrl: item.images?.[1]?.url
     }
   }
 
@@ -27,7 +27,7 @@ export function extractInfo(item) {
       id: item.id,
       title: item.name,
       subtitle: 'Artist',
-      url: item.images[1].url
+      imageUrl: item.images?.[1]?.url
     }
   }
 }

@@ -12,9 +12,10 @@ import ArtistList from '../../ui/artist/ArtistList'
 import TrackList from '../../ui/track/TrackList'
 import { Flex, FlexItem } from '../../ui/base'
 import TitleBar from './TitleBar'
-import MainResult from './MainResult'
 import WaitUntil from '../../ui/wait-until/WaitUntil'
 import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
+import Card from '../../ui/card/Card'
+import { extractInfo } from '../../lib/helpers'
 
 export default function Search() {
   const { searchTerm } = useParams()
@@ -62,7 +63,7 @@ export default function Search() {
       <Flex>
         <FlexItem flex="1">
           <TitleBar title="Main Result" />
-          <MainResult item={searchData?.mainResult} />
+          <Card item={extractInfo(searchData?.mainResult)} />
         </FlexItem>
         <FlexItem flex="1">
           <TitleBar title="Songs" />
