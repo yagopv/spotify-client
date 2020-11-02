@@ -1,17 +1,24 @@
 import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import http from '../../http'
-import { useAsync } from '../../lib/hooks/useAsync'
+import {
+  PENDING_STATUS,
+  REJECTED_STATUS,
+  RESOLVED_STATUS,
+  useAsync
+} from '../../lib/hooks/useAsync'
 import AlbumList from '../../ui/album/AlbumList'
 import ArtistList from '../../ui/artist/ArtistList'
 import TrackList from '../../ui/track/TrackList'
 import { Flex, FlexItem } from '../../ui/base'
 import TitleBar from './TitleBar'
 import MainResult from './MainResult'
+import WaitUntil from '../../ui/wait-until/WaitUntil'
+import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
 
 export default function Search() {
   const { searchTerm } = useParams()
-  const { data, run } = useAsync()
+  const { status, data, run } = useAsync()
 
   useEffect(() => {
     if (searchTerm) {
@@ -48,7 +55,10 @@ export default function Search() {
   }, [data])
 
   return (
-    <>
+    <WaitUntil
+      condition={status === RESOLVED_STATUS}
+      fallback={() => <ElectricGuitar />}
+    >
       <Flex>
         <FlexItem flex="1">
           <TitleBar title="Main Result" />
@@ -63,6 +73,6 @@ export default function Search() {
       <ArtistList artists={searchData?.artists} />
       <TitleBar title="Albums" onShowAll={() => console.log('click')} />
       <AlbumList albums={searchData?.albums} />
-    </>
+    </WaitUntil>
   )
 }
