@@ -8,7 +8,7 @@ export default function TitleBar({ title, onShowAll }) {
         <Text as="h4">{title}</Text>
         {onShowAll && (
           <FlexItem flex="1" textAlign="right">
-            <Link to="#" textAlign="right" onClick={onShowAll}>
+            <Link to="#" onClick={onShowAll}>
               Show All
             </Link>
           </FlexItem>
