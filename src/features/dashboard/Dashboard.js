@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { NavLink, List, ListItem, Text, Box } from '../../ui/base'
 import Header from './Header'
-import { DashboardContainer, DashboardNavbar, DashboardContent } from './styles'
+import {
+  DashboardContainer,
+  DashboardNavbar,
+  DashboardContent,
+  DashboardMain
+} from './styles'
 import { useAuth } from '../../lib/context/auth-context'
 import { useUI } from '../../lib/context/ui-context'
 import { useOnClickOutside } from '../../lib/hooks/useOnClickOutside'
@@ -92,7 +97,7 @@ export function Dashboard() {
               setUser(null)
             }}
           />
-          <Box p="md">
+          <DashboardMain p="md">
             <Switch>
               <PrivateRoute exact path={path}>
                 <Home />
@@ -104,7 +109,7 @@ export function Dashboard() {
                 <MyLibrary />
               </PrivateRoute>
             </Switch>
-          </Box>
+          </DashboardMain>
         </DashboardContent>
       </DashboardContainer>
     </React.Fragment>

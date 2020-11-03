@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import { theme } from '../../ui/theme'
-import { FlexItem, Input, Link } from '../../ui/base'
+import { Box, FlexItem, Input, Link } from '../../ui/base'
 import { FaAngleLeft, FaBars, FaSearch } from 'react-icons/fa'
 
 export const DashboardContainer = styled.div`
@@ -19,13 +19,21 @@ export const DashboardContainer = styled.div`
   `}
 `
 
+export const DashboardMain = styled(Box)`
+  overflow: auto;
+  flex: 1 1 auto;
+`
+
 export const DashboardNavbar = styled.nav`
   background-color: #000;
   padding: 5px 1.2rem;
 `
 
 export const DashboardContent = styled.section`
-  background-color: #181818;
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
 `
 
 export const MenuIcon = styled(FaBars)`

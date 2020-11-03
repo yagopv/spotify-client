@@ -16,7 +16,9 @@ export const theme = {
     red: '#E94F64',
     orange: '#E57254',
     yellow: '#E5C454',
-    green: '#52D273'
+    green: '#52D273',
+    blackContainer: '#181818',
+    blackContainerHover: '#282828'
   },
   fontFamily: {
     primary: '"Raleway", sans-serif',
