@@ -1,19 +1,18 @@
 import React from 'react'
 import { extractInfo } from '../../lib/helpers'
 import { Flex, FlexItem, Text } from '../base'
+import { TrackImage, TrackWrapper } from './styles'
 
 function Track({ track }) {
-  const data = extractInfo(track)
-
   return (
-    <Flex alignItems="center">
-      <img src={data?.url} style={{ height: '40px' }} />
-      <FlexItem flex="1">
-        <Text>{data?.title}</Text>
-        <Text as="h4">{data?.subtitle}</Text>
+    <TrackWrapper as="article" alignItems="center" p="sm">
+      <TrackImage src={track?.imageUrl} alt={track?.title} />
+      <FlexItem flex="1" px="md">
+        <Text as="h4">{track?.title}</Text>
+        <Text as="p">{track?.subtitle}</Text>
       </FlexItem>
-      <Text>{data?.duration}</Text>
-    </Flex>
+      <Text as="h5">{track?.duration}</Text>
+    </TrackWrapper>
   )
 }
 

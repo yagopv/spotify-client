@@ -7,17 +7,17 @@ import { getParamValues } from '../../lib/helpers'
 export default function Redirect() {
   const history = useHistory()
   const location = useLocation()
-  const [, setUser] = useAuth()
+  const { setTokens } = useAuth()
 
   useEffect(() => {
     const params = getParamValues(location.hash)
     const expiryTime = new Date().getTime() + params.expires_in * 1000
-    localStorage.setItem('currentUser', JSON.stringify(params))
+    localStorage.setItem('tokens', JSON.stringify(params))
     localStorage.setItem('expiryTime', expiryTime)
-    http.currentUser = params
-    setUser(params)
+    http.tokens = params
+    setTokens(params)
     history.push('/')
-  }, [history, location.hash, setUser])
+  }, [history, location.hash, setTokens])
 
   return null
 }

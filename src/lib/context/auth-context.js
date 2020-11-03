@@ -3,9 +3,16 @@ import React, { useState } from 'react'
 const AuthContext = React.createContext()
 
 export function AuthProvider({ children }) {
-  const state = useState(localStorage.getItem('currentUser'))
+  const [tokens, setTokens] = useState(localStorage.getItem('tokens'))
+  const [currentUser, setCurrentUser] = useState()
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider
+      value={{ tokens, setTokens, currentUser, setCurrentUser }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export function useAuth() {

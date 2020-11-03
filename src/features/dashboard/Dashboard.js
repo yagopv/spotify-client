@@ -23,7 +23,7 @@ export function Dashboard() {
   const [uiState, setUIState] = useUI()
   const categoryList = useRef(null)
   const history = useHistory(null)
-  const [user, setUser] = useAuth()
+  const { setTokens, setCurrentUser } = useAuth()
 
   useOnClickOutside(categoryList, () => {
     if (uiState.isCategoryMenuOpened) {
@@ -35,7 +35,9 @@ export function Dashboard() {
 
   let { path, url } = useRouteMatch()
 
-  const { data: profile, run: runProfile } = useAsync()
+  const { data: profile, run: runProfile } = useAsync(null, {
+    onResolve: setCurrentUser
+  })
 
   useEffect(() => {
     runProfile(http.getUser())
@@ -92,9 +94,9 @@ export function Dashboard() {
             }}
             onLogout={() => {
               history.push('/login')
-              localStorage.removeItem('currentUser')
-              http.currentUser = null
-              setUser(null)
+              localStorage.removeItem('tokens')
+              http.tokens = null
+              setTokens(null)
             }}
           />
           <DashboardMain p="md">

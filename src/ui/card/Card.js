@@ -13,10 +13,10 @@ export default function Card({ item: { title, subtitle, imageUrl } }) {
         </SVGContainer>
       )}
       <CardBody>
-        <Text truncate={1} as="p">
+        <Text truncate={1} as="h5">
           {title}
         </Text>
-        <Text truncate={1} as="h5">
+        <Text truncate={1} as="p">
           {subtitle}
         </Text>
       </CardBody>

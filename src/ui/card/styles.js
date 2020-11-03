@@ -34,7 +34,7 @@ export const SVGContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  flex: 3;
   background-color: ${theme.colors.darkGrey};
   border-radius: 2px;
 

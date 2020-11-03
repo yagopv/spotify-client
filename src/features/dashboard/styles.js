@@ -2,14 +2,17 @@ import styled from 'styled-components/macro'
 import { theme } from '../../ui/theme'
 import { Box, Input, Link } from '../../ui/base'
 import { FaAngleLeft, FaBars, FaSearch } from 'react-icons/fa'
+import Card from '../../ui/card/Card'
+import { CardWrapper } from '../../ui/card/styles'
 
 export const DashboardContainer = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: minmax(200px, 20vw) 1fr;
+  grid-template-columns: minmax(200px, 15vw) 1fr;
   transform: translateX(0);
   transition: transform 0.5s ease;
   height: 100%;
+
   ${props => `
     @media ${props.theme.breakpoints.xs} {
       grid-template-columns: 50vw 100vw;
@@ -109,9 +112,10 @@ export const UserMenu = styled.div`
   text-align: right;
   border: 1px solid ${theme.colors.yellow};
   padding: ${theme.spacing.md};
-
   opacity: 0;
   transition: all 0.1s linear;
+  background-color: ${theme.colors.blackContainer};
+  margin-top: ${theme.spacing.sm};
 
   ${props =>
     props.active &&
@@ -121,6 +125,25 @@ export const UserMenu = styled.div`
 
   ${Link} {
     display: block;
-    margin-top: 10px;
+    margin-top: ${theme.spacing.md};
+  }
+
+  :hover {
+    background-color: ${theme.colors.blackContainerHover};
+  }
+`
+
+export const MainResultContainer = styled.div`
+  background-color: ${theme.colors.blackContainer};
+  transition: background-color 0.3s ease-out;
+
+  :hover {
+    background-color: ${theme.colors.blackContainerHover};
+  }
+
+  ${CardWrapper} {
+    max-width: 250px;
+    text-align: center;
+    background-color: transparent;
   }
 `

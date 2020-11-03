@@ -4,21 +4,17 @@ import * as albumsMethods from './albums'
 import * as tracksMethods from './tracks'
 import * as searchMethods from './search'
 import * as userMethods from './user'
-import {
-  tokenManagerInterceptor,
-  dataInterceptor,
-  currentUser,
-  errorInterceptor
-} from './interceptors'
+import { requestInterceptor, responseInterceptor, tokens } from './interceptors'
 
 axios.interceptors.request.use(
-  tokenManagerInterceptor.success,
-  tokenManagerInterceptor.error
+  requestInterceptor.success,
+  requestInterceptor.error
 )
 
-axios.interceptors.response.use(dataInterceptor.success)
-
-axios.interceptors.response.use(null, errorInterceptor.error)
+axios.interceptors.response.use(
+  responseInterceptor.success,
+  responseInterceptor.error
+)
 
 const http = {
   ...artistsMethods,
@@ -26,7 +22,7 @@ const http = {
   ...tracksMethods,
   ...searchMethods,
   ...userMethods,
-  currentUser
+  tokens
 }
 
 export default http

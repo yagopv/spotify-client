@@ -1,22 +1,17 @@
 import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import http from '../../http'
-import {
-  PENDING_STATUS,
-  REJECTED_STATUS,
-  RESOLVED_STATUS,
-  useAsync
-} from '../../lib/hooks/useAsync'
-import AlbumList from '../../ui/album/AlbumList'
-import ArtistList from '../../ui/artist/ArtistList'
+import { RESOLVED_STATUS, useAsync } from '../../lib/hooks/useAsync'
 import TrackList from '../../ui/track/TrackList'
-import { Flex, FlexItem } from '../../ui/base'
+import { Box, Flex, FlexItem } from '../../ui/base'
 import TitleBar from './TitleBar'
 import WaitUntil from '../../ui/wait-until/WaitUntil'
 import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
 import Card from '../../ui/card/Card'
 import { extractInfo } from '../../lib/helpers'
 import CardList from '../../ui/card/CardList'
+import { MainResultContainer } from '../dashboard/styles'
+import { theme } from '../../ui/theme'
 
 export default function Search() {
   const { searchTerm } = useParams()
@@ -62,13 +57,15 @@ export default function Search() {
       fallback={() => <ElectricGuitar />}
     >
       <Flex>
-        <FlexItem flex="1">
+        <FlexItem flex=".5">
           <TitleBar title="Main Result" />
-          <Card item={extractInfo(searchData?.mainResult)} />
+          <MainResultContainer>
+            <Card item={extractInfo(searchData?.mainResult)} />
+          </MainResultContainer>
         </FlexItem>
-        <FlexItem flex="1">
-          <TitleBar title="Songs" />
-          <TrackList tracks={searchData?.tracks} />
+        <FlexItem flex="1" ml="lg">
+          <TitleBar title="Songs" onShowAll={() => console.log('click')} />
+          <TrackList tracks={searchData?.tracks.slice(0, 4)} />
         </FlexItem>
       </Flex>
       <TitleBar title="Artists" onShowAll={() => console.log('click')} />

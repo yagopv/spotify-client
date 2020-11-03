@@ -1,8 +1,8 @@
-let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+let tokens = JSON.parse(localStorage.getItem('tokens'))
 
-export const tokenManagerInterceptor = {
+export const requestInterceptor = {
   success(config) {
-    const { access_token: token } = currentUser
+    const { access_token: token } = tokens || {}
 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
@@ -14,19 +14,16 @@ export const tokenManagerInterceptor = {
   }
 }
 
-export const dataInterceptor = {
+export const responseInterceptor = {
   success(response) {
     return response.data
-  }
-}
-
-export const errorInterceptor = {
+  },
   error(error) {
-    if ([401, 403].includes(error.status)) {
+    if ([401, 403].includes(error.response.status)) {
       window.location.href = '/login'
     }
     return Promise.reject(error)
   }
 }
 
-export { currentUser }
+export { tokens }

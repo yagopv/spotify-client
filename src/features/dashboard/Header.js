@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useDebounce } from '../../lib/hooks/useDebounce'
-import { useMedia } from '../../lib/hooks/useMedia'
-import { Flex, FlexItem, Link, Text } from '../../ui/base'
-import { theme } from '../../ui/theme'
+import { Flex, FlexItem } from '../../ui/base'
 import { MenuIcon, BackIcon, SearchIcon, SearchInput } from './styles'
 import UserInfo from './UserInfo'
+import { useDebounce } from '../../lib/hooks/useDebounce'
 
 export default function Header({ user, onToggleMenu, onLogout, onTextChange }) {
-  const isMobile = useMedia([theme.breakpoints.sm], [false], true)
   const location = useLocation()
   const history = useHistory()
   const [searchTerm, setSearchTerm] = useState('')

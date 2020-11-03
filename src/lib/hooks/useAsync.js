@@ -38,7 +38,10 @@ function asyncReducer(state, action) {
   }
 }
 
-function useAsync(initialState) {
+function useAsync(
+  initialState,
+  { onResolve = () => {}, onError = () => {} } = {}
+) {
   const [state, unsafeDispatch] = React.useReducer(asyncReducer, {
     status: IDLE_STATUS,
     data: null,
@@ -63,12 +66,14 @@ function useAsync(initialState) {
       promise.then(
         data => {
           dispatch({ type: RESOLVED_STATUS, data })
+          onResolve(data)
           if (cacheKey) {
             cache.set(cacheKey, data)
           }
         },
         error => {
           dispatch({ type: REJECTED_STATUS, error })
+          onError(error)
         }
       )
     },
