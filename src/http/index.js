@@ -7,7 +7,8 @@ import * as userMethods from './user'
 import {
   tokenManagerInterceptor,
   dataInterceptor,
-  currentUser
+  currentUser,
+  errorInterceptor
 } from './interceptors'
 
 axios.interceptors.request.use(
@@ -16,6 +17,8 @@ axios.interceptors.request.use(
 )
 
 axios.interceptors.response.use(dataInterceptor.success)
+
+axios.interceptors.response.use(null, errorInterceptor.error)
 
 const http = {
   ...artistsMethods,

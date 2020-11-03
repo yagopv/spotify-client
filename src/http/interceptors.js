@@ -20,4 +20,13 @@ export const dataInterceptor = {
   }
 }
 
+export const errorInterceptor = {
+  error(error) {
+    if ([401, 403].includes(error.status)) {
+      window.location.href = '/login'
+    }
+    return Promise.reject(error)
+  }
+}
+
 export { currentUser }
