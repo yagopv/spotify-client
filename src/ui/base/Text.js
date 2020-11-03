@@ -24,14 +24,14 @@ export const Text = styled(Box)`
   color: ${props =>
     theme.colors[props.color] ||
     (isHeading(props.as) ? theme.colors.lightGrey : theme.colors.darkGrey)};
-  font-weight: ${props => (isHeading(props.as) ? '900' : '400')}
+  font-weight: ${props => (isHeading(props.as) ? '900' : '400')};
   font-family: ${props =>
     theme.fontFamily[props.fontFamily] ||
     (isHeading(props.as)
       ? theme.fontFamily.secondary
       : theme.fontFamily.primary)};
-  font-size:  ${props => theme.fontSize[props.as] || '0.8rem'};
-  text-transform:  ${props =>
+  font-size: ${props => theme.fontSize[props.as] || '0.8rem'};
+  text-transform: ${props =>
     props.textTransform || (isHeading(props.as) ? 'uppercase' : 'none')};
   line-height: ${props => isHeading(props.as) && '2rem'};
   ${props => props.truncate === 1 && truncatedMixin}

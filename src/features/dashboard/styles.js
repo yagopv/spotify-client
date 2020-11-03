@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import { theme } from '../../ui/theme'
-import { Box, FlexItem, Input, Link } from '../../ui/base'
+import { Box, Input, Link } from '../../ui/base'
 import { FaAngleLeft, FaBars, FaSearch } from 'react-icons/fa'
 
 export const DashboardContainer = styled.div`
