@@ -18,6 +18,7 @@ import MyLibrary from '../my-library/MyLibrary'
 import { FaSistrix, FaHome, FaBook, FaSpotify } from 'react-icons/fa'
 import { useAsync } from '../../lib/hooks/useAsync'
 import http from '../../http'
+import Artists from '../artists/Artists'
 
 export function Dashboard() {
   const [uiState, setUIState] = useUI()
@@ -103,6 +104,9 @@ export function Dashboard() {
             <Switch>
               <PrivateRoute exact path={path}>
                 <Home />
+              </PrivateRoute>
+              <PrivateRoute path={`/search/:searchTerm/artists`}>
+                <Artists />
               </PrivateRoute>
               <PrivateRoute path={`/search/:searchTerm`}>
                 <Search />

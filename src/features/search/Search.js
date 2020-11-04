@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import http from '../../http'
 import { RESOLVED_STATUS, useAsync } from '../../lib/hooks/useAsync'
 import TrackList from '../../ui/track/TrackList'
-import { Box, Flex, FlexItem } from '../../ui/base'
+import { Flex, FlexItem } from '../../ui/base'
 import TitleBar from './TitleBar'
 import WaitUntil from '../../ui/wait-until/WaitUntil'
 import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
@@ -11,7 +11,6 @@ import Card from '../../ui/card/Card'
 import { extractInfo } from '../../lib/helpers'
 import CardList from '../../ui/card/CardList'
 import { MainResultContainer } from '../dashboard/styles'
-import { theme } from '../../ui/theme'
 
 export default function Search() {
   const { searchTerm } = useParams()
