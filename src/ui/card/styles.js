@@ -5,7 +5,7 @@ export const CardContainer = styled.section`
   margin: ${theme.spacing.lg} 0;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 `
 
 export const CardWrapper = styled.div`
