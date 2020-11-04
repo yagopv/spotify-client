@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import http from '../../http'
 import { RESOLVED_STATUS, useAsync } from '../../lib/hooks/useAsync'
 import TrackList from '../../ui/track/TrackList'
@@ -18,7 +18,12 @@ export default function Search() {
 
   useEffect(() => {
     if (searchTerm) {
-      run(http.searchAll(searchTerm, 1, 8))
+      run(
+        http.search(searchTerm, 'album,artist,track', {
+          page: 0,
+          limit: 8
+        })
+      )
     }
   }, [run, searchTerm])
 
@@ -63,13 +68,13 @@ export default function Search() {
           </MainResultContainer>
         </FlexItem>
         <FlexItem flex="1" ml="lg">
-          <TitleBar title="Songs" onShowAll={() => console.log('click')} />
+          <TitleBar title="Songs" url={`/search/${searchTerm}/track`} />
           <TrackList tracks={searchData?.tracks.slice(0, 4)} />
         </FlexItem>
       </Flex>
-      <TitleBar title="Artists" onShowAll={() => console.log('click')} />
+      <TitleBar title="Artists" url={`/search/${searchTerm}/artist`} />
       <CardList id="artists" items={searchData?.artists} />
-      <TitleBar title="Albums" onShowAll={() => console.log('click')} />
+      <TitleBar title="Albums" url={`/search/${searchTerm}/album`} />
       <CardList id="albums" items={searchData?.albums} />
     </WaitUntil>
   )
