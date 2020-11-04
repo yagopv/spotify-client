@@ -8,7 +8,15 @@ import { useDebounce } from '../../lib/hooks/useDebounce'
 export default function Header({ user, onToggleMenu, onLogout, onTextChange }) {
   const location = useLocation()
   const history = useHistory()
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState(() => {
+    const path = location.pathname.split('/')
+
+    if (path.includes('search')) {
+      return path[2]
+    }
+
+    return ''
+  })
   const debouncedValue = useDebounce(term, 1000)
   const { searchTerm } = useParams()
 

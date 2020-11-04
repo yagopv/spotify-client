@@ -105,11 +105,11 @@ export function Dashboard() {
               <PrivateRoute exact path={path}>
                 <Home />
               </PrivateRoute>
+              <PrivateRoute exact path={`/search/:searchTerm`}>
+                <Search />
+              </PrivateRoute>
               <PrivateRoute path={`/search/:searchTerm/:searchType`}>
                 <SearchByType />
-              </PrivateRoute>
-              <PrivateRoute path={`/search/:searchTerm`}>
-                <Search />
               </PrivateRoute>
               <PrivateRoute path={`/my-library`}>
                 <MyLibrary />
