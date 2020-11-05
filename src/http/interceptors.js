@@ -1,5 +1,9 @@
 let tokens = JSON.parse(localStorage.getItem('tokens'))
 
+export function setTokens(tk) {
+  tokens = tk
+}
+
 export const requestInterceptor = {
   success(config) {
     const { access_token: token } = tokens || {}
@@ -25,5 +29,3 @@ export const responseInterceptor = {
     return Promise.reject(error)
   }
 }
-
-export { tokens }

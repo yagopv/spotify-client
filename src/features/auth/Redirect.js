@@ -14,7 +14,7 @@ export default function Redirect() {
     const expiryTime = new Date().getTime() + params.expires_in * 1000
     localStorage.setItem('tokens', JSON.stringify(params))
     localStorage.setItem('expiryTime', expiryTime)
-    http.tokens = params
+    http.setTokens(params)
     setTokens(params)
     history.push('/')
   }, [history, location.hash, setTokens])

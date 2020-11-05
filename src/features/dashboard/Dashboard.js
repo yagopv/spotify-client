@@ -19,6 +19,7 @@ import { FaSistrix, FaHome, FaBook, FaSpotify } from 'react-icons/fa'
 import { useAsync } from '../../lib/hooks/useAsync'
 import http from '../../http'
 import SearchByType from '../search/SearchByType'
+import Redirect from '../auth/Redirect'
 
 export function Dashboard() {
   const [uiState, setUIState] = useUI()
@@ -53,7 +54,7 @@ export function Dashboard() {
           </Text>
           <List mt="xl">
             <ListItem mt="md">
-              <NavLink exact to={`${url}`}>
+              <NavLink exact to="/">
                 <FaHome />{' '}
                 <Box as="span" pl="xs">
                   Home
@@ -61,7 +62,7 @@ export function Dashboard() {
               </NavLink>
             </ListItem>
             <ListItem mt="md">
-              <NavLink to={'/search'}>
+              <NavLink to="/search">
                 <FaSistrix />
                 <Box as="span" pl="xs">
                   Search
@@ -69,7 +70,7 @@ export function Dashboard() {
               </NavLink>
             </ListItem>
             <ListItem mt="md">
-              <NavLink to={`/my-library`}>
+              <NavLink to="/my-library">
                 <FaBook />
                 <Box as="span" pl="xs">
                   MyLibrary
@@ -102,16 +103,16 @@ export function Dashboard() {
           />
           <DashboardMain p="md">
             <Switch>
-              <PrivateRoute exact path={path}>
+              <PrivateRoute exact path="/">
                 <Home />
               </PrivateRoute>
-              <PrivateRoute exact path={`/search/:searchTerm`}>
+              <PrivateRoute path="/search/:searchTerm">
                 <Search />
               </PrivateRoute>
-              <PrivateRoute path={`/search/:searchTerm/:searchType`}>
+              <PrivateRoute path="/search/:searchTerm/:searchType">
                 <SearchByType />
               </PrivateRoute>
-              <PrivateRoute path={`/my-library`}>
+              <PrivateRoute path="/my-library">
                 <MyLibrary />
               </PrivateRoute>
             </Switch>
