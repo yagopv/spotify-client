@@ -19,7 +19,6 @@ import { FaSistrix, FaHome, FaBook, FaSpotify } from 'react-icons/fa'
 import { useAsync } from '../../lib/hooks/useAsync'
 import http from '../../http'
 import SearchByType from '../search/SearchByType'
-import Redirect from '../auth/Redirect'
 
 export function Dashboard() {
   const [uiState, setUIState] = useUI()
@@ -106,7 +105,7 @@ export function Dashboard() {
               <PrivateRoute exact path="/">
                 <Home />
               </PrivateRoute>
-              <PrivateRoute path="/search/:searchTerm">
+              <PrivateRoute exact path="/search/:searchTerm">
                 <Search />
               </PrivateRoute>
               <PrivateRoute path="/search/:searchTerm/:searchType">

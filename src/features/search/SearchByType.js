@@ -4,6 +4,7 @@ import http from '../../http'
 import { RESOLVED_STATUS, useAsync } from '../../lib/hooks/useAsync'
 import ElectricGuitar from '../../ui/animations/electric-guitar/ElectricGuitar'
 import CardList from '../../ui/card/CardList'
+import TrackList from '../../ui/track/TrackList'
 import WaitUntil from '../../ui/wait-until/WaitUntil'
 
 export default function SearchByType() {
@@ -34,7 +35,11 @@ export default function SearchByType() {
       condition={status === RESOLVED_STATUS}
       fallback={() => <ElectricGuitar />}
     >
-      <CardList id="search-by-type" items={items} />
+      {searchType === 'track' ? (
+        <TrackList tracks={items} />
+      ) : (
+        <CardList id="search-by-type" items={items} />
+      )}
     </WaitUntil>
   )
 }
