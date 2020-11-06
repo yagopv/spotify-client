@@ -116,10 +116,13 @@ export const UserMenu = styled.div`
   transition: all 0.1s linear;
   background-color: ${theme.colors.blackContainer};
   margin-top: ${theme.spacing.sm};
+  visibility: hidden;
+  z-index: 1000;
 
   ${props =>
     props.active &&
     `
+    visibility: visible;
     opacity: 1;
   `};
 
